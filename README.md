@@ -1,56 +1,28 @@
-Basic CRUD API with Golang
+# Basic CRUD API with Golang
 
 This is a basic CRUD (Create, Read, Update, Delete) API implemented using Golang. The API provides endpoints to create, read, update, and delete data from a database.
 Technologies Used
 
     Golang
     Gorilla Mux - A powerful HTTP router and URL matcher for building Go web servers
-    MySQL - A popular relational database management system
 
-Installation and Setup
+#### Installation and Setup
 
     Clone the repository:
 
-sh
-git clone https://github.com/username/repo.git
+`git clone https://github.com/username/repo.git`
 
-    Install the required dependencies:
+### Install the required dependencies:
 
-sh
-go get -u github.com/gorilla/mux
-go get -u github.com/go-sql-driver/mysql
+`go get -u github.com/gorilla/mux`
 
-    Set up the MySQL database. Create a new database and table using the following SQL commands:
 
-sql
-CREATE DATABASE dbname;
+## Run the API:
 
-USE dbname;
+`go run main.go`
 
-CREATE TABLE IF NOT EXISTS users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
 
-    Configure the database connection in config.go:
-
-go
-const (
-    host     = "localhost"
-    port     = "3306"
-    user     = "yourusername"
-    password = "yourpassword"
-    dbname   = "dbname"
-)
-
-    Run the API:
-
-sh
-go run main.go
-
-Usage
+## Usage
 
 The API provides the following endpoints:
 
@@ -60,7 +32,8 @@ The API provides the following endpoints:
     PUT /users/{id} - Update a specific user
     DELETE /users/{id} - Delete a specific user
 
-The request and response bodies for each endpoint are as follows:
+
+### The request and response bodies for each endpoint are as follows:
 GET /users
 
 No request body is required.
@@ -68,76 +41,85 @@ No request body is required.
 Response body:
 
 json
-[
+`[
     {
-        "id": 1,
-        "name": "John Doe",
-        "email": "johndoe@example.com",
-        "password": "password123"
+        "id": "1",
+        "isbn": "45321",
+        "title": "The Prestige",
+        "director": {
+            "Firstname": "Christropher",
+            "Lastname": "Nolan"
+        }
     },
     {
-        "id": 2,
-        "name": "Jane Doe",
-        "email": "janedoe@example.com",
-        "password": "password456"
+        "id": "2",
+        "isbn": "87628",
+        "title": "Slumdog millionair",
+        "director": {
+            "Firstname": "Danny",
+            "Lastname": "Boyle"
+        }
     }
-]
+]`
 
-GET /users/{id}
+GET /users/1
 
 No request body is required.
 
 Response body:
 
 json
-{
-    "id": 1,
-    "name": "John Doe",
-    "email": "johndoe@example.com",
-    "password": "password123"
-}
+`{
+        "id": "1",
+        "isbn": "45321",
+        "title": "The Prestige",
+        "director": {
+            "Firstname": "Christropher",
+            "Lastname": "Nolan"
+        }
+}`
 
 POST /users
 
 Request body:
 
 json
-{
+`{
     "name": "John Doe",
     "email": "johndoe@example.com",
     "password": "password123"
-}
+}`
 
 Response body:
 
 json
-{
+`{
     "id": 1,
     "name": "John Doe",
     "email": "johndoe@example.com",
     "password": "password123"
-}
+}`
 
 PUT /users/{id}
 
 Request body:
 
 json
-{
+`{
     "name": "John Doe Jr.",
     "email": "johnjr@example.com",
     "password": "newpassword"
-}
+}`
 
 Response body:
 
 json
-{
+`{
     "id": 1,
     "name": "John Doe Jr.",
     "email": "johnjr@example.com",
     "password": "newpassword"
-}
+}`
 
 DELETE /users/{id}
 
@@ -145,11 +127,8 @@ No request body is required.
 
 Response body:
 
-json
-{
-    "message": "User deleted successfully"
-}
+It will return all the remaining objects except the one that was deleted
 
-License
+### License
 
-This project is licensed under the MIT License - see the [LICENSE](
+This project is licensed under the MIT License 
